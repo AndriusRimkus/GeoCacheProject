@@ -29,7 +29,8 @@ public class RegisterFragment extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-                ft.replace(R.id.fragmentContainer, ((MainActivity) getActivity()).loginFragment);
+                ft.detach(((MainActivity) getActivity()).getRegisterFragment());
+                ft.attach(((MainActivity) getActivity()).getLoginFragment());
                 ft.commit();
             }
         });
