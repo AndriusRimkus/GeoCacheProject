@@ -28,8 +28,8 @@ public class RegisterFragment extends Fragment {
             public void doBack() {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-                ft.replace(R.id.fragmentContainer, new LoginFragment());
+                ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+                ft.replace(R.id.fragmentContainer, ((MainActivity) getActivity()).loginFragment);
                 ft.commit();
             }
         });

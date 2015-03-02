@@ -21,16 +21,18 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
+        //Toast.makeText(getActivity(), String.valueOf(getActivity().getSupportFragmentManager().getBackStackEntryCount()), Toast.LENGTH_SHORT).show();
 
         ((MainActivity)getActivity()).setOnBackPressedListener(null);
         Button regLoginBtn = (Button) v.findViewById(R.id.login_reg);
+
         regLoginBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-                ft.replace(R.id.fragmentContainer, new RegisterFragment());
+                ft.replace(R.id.fragmentContainer, ((MainActivity) getActivity()).getRegisterFragment());
                 ft.commit();
             }
         });
