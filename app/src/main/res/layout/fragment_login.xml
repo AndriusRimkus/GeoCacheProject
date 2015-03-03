@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="50dp">
+    android:layout_marginTop="20dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -12,22 +12,39 @@
         style="?android:listSeparatorTextViewStyle" />
 
     <EditText
-        android:id="@+id/login_username"
+        android:id="@+id/loginUser"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username" />
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/abc_edit_text_material"
+        android:ems="10"
+        android:hint="Username"
+        android:paddingLeft="10dp"
+        android:inputType="text"
+        android:singleLine="true" >
+    </EditText>
 
     <EditText
-        android:id="@+id/login_password"
+        android:id="@+id/loginPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password" />
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/abc_edit_text_material"
+        android:ems="10"
+        android:hint="Password"
+        android:paddingLeft="10dp"
+        android:inputType="textPassword"
+        android:singleLine="true" >
+    </EditText>
 
     <Button
         android:id="@+id/login_btn"
-        android:text="Login"
+        android:text="Sign In"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp" />
     <CheckBox
@@ -41,12 +58,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Don't have account?"
+        android:layout_marginTop="16dp"
         style="?android:listSeparatorTextViewStyle" />
     <Button
         android:id="@+id/login_reg"
         android:text="Register here"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp" />
 

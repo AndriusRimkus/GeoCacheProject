@@ -32,7 +32,8 @@ public class LoginFragment extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-                ft.replace(R.id.fragmentContainer, ((MainActivity) getActivity()).getRegisterFragment());
+                ft.detach(((MainActivity) getActivity()).getLoginFragment());
+                ft.attach(((MainActivity) getActivity()).getRegisterFragment());
                 ft.commit();
             }
         });

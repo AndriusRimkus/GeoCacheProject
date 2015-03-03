@@ -2,17 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_marginTop="20dp">
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_weight="3">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register new account"
+        android:text="Login to app"
         style="?android:listSeparatorTextViewStyle" />
 
     <EditText
-        android:id="@+id/regUser"
+        android:id="@+id/loginUser"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="15dp"
@@ -26,7 +30,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/regPassword"
+        android:id="@+id/loginPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="15dp"
@@ -39,27 +43,40 @@
         android:singleLine="true" >
     </EditText>
 
-    <EditText
-        android:id="@+id/regRepeatPassword"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/abc_edit_text_material"
-        android:ems="10"
-        android:hint="Repeat password"
-        android:paddingLeft="10dp"
-        android:inputType="textPassword"
-        android:singleLine="true" >
-    </EditText>
-
     <Button
-        android:id="@+id/register_btn"
-        android:text="Register"
+        android:id="@+id/login_btn"
+        android:text="Sign In"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp" />
+    <CheckBox
+        android:id="@+id/remember_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Remember me" />
+</LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Don't have account?"
+        style="?android:listSeparatorTextViewStyle" />
+    <Button
+        android:id="@+id/login_reg"
+        android:text="Register here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
+    </LinearLayout>
 </LinearLayout>

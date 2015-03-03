@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,11 +28,22 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       registerFragment = new RegisterFragment();
-       loginFragment = new LoginFragment();
+       // Toast.makeText(this, "onCreate", Toast.LENGTH_SHORT).show();
 
-       FragmentManager fm = getSupportFragmentManager();
-       fm.beginTransaction().add(R.id.fragmentContainer, loginFragment).commit();
+        if (savedInstanceState == null) {
+            registerFragment = new RegisterFragment();
+            loginFragment = new LoginFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+            ft.add(R.id.fragmentContainer, registerFragment);
+            ft.detach(registerFragment);
+            ft.add(R.id.fragmentContainer, loginFragment);
+            ft.commit();
+        }
+        else {
+            loginFragment = getSupportFragmentManager().getFragment(savedInstanceState, "loginFragment");
+            registerFragment = getSupportFragmentManager().getFragment(savedInstanceState, "registerFragment");
+        }
     }
 
     @Override
@@ -67,5 +79,12 @@ public class MainActivity extends ActionBarActivity {
         else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        getSupportFragmentManager().putFragment(outState, "loginFragment", loginFragment);
+        getSupportFragmentManager().putFragment(outState, "registerFragment", registerFragment);
     }
 }
