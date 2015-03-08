@@ -64,6 +64,10 @@ public class MainActivity extends ActionBarActivity {
             Intent intent = new Intent(this, BarcodeScanner.class);
             startActivity(intent);
         }
+        if (id == R.id.Karolio) {
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
