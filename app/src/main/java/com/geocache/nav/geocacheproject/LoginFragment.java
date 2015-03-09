@@ -1,6 +1,7 @@
 package com.geocache.nav.geocacheproject;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,35 +13,34 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class LoginFragment extends Fragment {
+    private Button regLoginBtn;
+    private LoginFragmentInterface loginInterface;
 
     public LoginFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
-        //Toast.makeText(getActivity(), String.valueOf(getActivity().getSupportFragmentManager().getBackStackEntryCount()), Toast.LENGTH_SHORT).show();
-
-        ((MainActivity)getActivity()).setOnBackPressedListener(null);
-        Button regLoginBtn = (Button) v.findViewById(R.id.login_reg);
-
-        regLoginBtn.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-                ft.detach(((MainActivity) getActivity()).getLoginFragment());
-                ft.attach(((MainActivity) getActivity()).getRegisterFragment());
-                ft.commit();
-            }
-        });
+        regLoginBtn = (Button) v.findViewById(R.id.login_reg);
+        regLoginBtn.setOnClickListener(loginInterface.loginRegisterButtonClicked());
 
         return v;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            loginInterface = (LoginFragmentInterface) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement LoginFragmentInterface");
+        }
+    }
 
-
+    public static interface LoginFragmentInterface {
+        public View.OnClickListener loginButtonClicked();
+        public View.OnClickListener loginRegisterButtonClicked();
+    }
 }

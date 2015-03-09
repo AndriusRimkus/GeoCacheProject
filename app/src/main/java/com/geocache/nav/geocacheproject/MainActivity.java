@@ -8,20 +8,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
 
-public class MainActivity extends ActionBarActivity {
-    protected OnBackPressedListener onBackPressedListener;
-    Fragment registerFragment, loginFragment;
-
-    public Fragment getRegisterFragment() {
-        return registerFragment;
-    }
-
-    public Fragment getLoginFragment() {
-        return loginFragment;
-    }
+public class MainActivity extends ActionBarActivity implements RegisterFragment.RegisterFragmentInterface,
+        LoginFragment.LoginFragmentInterface {
+    // Views
+    Fragment registerFragment;
+    Fragment loginFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +66,16 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
-        this.onBackPressedListener = onBackPressedListener;
-    }
-
     @Override
     public void onBackPressed() {
-        if (onBackPressedListener != null)
-            onBackPressedListener.doBack();
+        if (!registerFragment.isDetached()) {
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+            ft.detach(registerFragment);
+            ft.attach(loginFragment);
+            ft.commit();
+        }
         else {
             super.onBackPressed();
         }
@@ -90,5 +86,30 @@ public class MainActivity extends ActionBarActivity {
         super.onSaveInstanceState(outState);
         getSupportFragmentManager().putFragment(outState, "loginFragment", loginFragment);
         getSupportFragmentManager().putFragment(outState, "registerFragment", registerFragment);
+    }
+
+    @Override
+    public View.OnClickListener registerButtonClicked() {
+        return null;
+    }
+
+    @Override
+    public View.OnClickListener loginButtonClicked() {
+        return null;
+    }
+
+    @Override
+    public View.OnClickListener loginRegisterButtonClicked() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                ft.detach(loginFragment);
+                ft.attach(registerFragment);
+                ft.commit();
+            }
+        };
     }
 }
